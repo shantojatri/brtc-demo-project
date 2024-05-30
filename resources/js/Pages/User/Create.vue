@@ -2,6 +2,9 @@
 import { reactive } from "vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, router, Link } from "@inertiajs/vue3";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 const userParams = reactive({
     name: null,
@@ -14,6 +17,7 @@ const userParams = reactive({
 });
 
 function createUserHandler() {
+    toast.success('User created successfully');
     router.post(route("users.store"), userParams);
 }
 </script>

@@ -1,13 +1,17 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, Link, router } from "@inertiajs/vue3";
+import { useToast } from "vue-toastification";
+
 defineProps({
     users: Object,
 });
 
+const toast = useToast();
+
 const DeleteUser = (userId) => {
     if (confirm("Confirm delete this user!")) {
-        console.log("deleted");
+        toast.success('User Deleted successfully');
         router.delete(route("users.destroy", userId));
     }
 };
@@ -131,6 +135,7 @@ const DeleteUser = (userId) => {
                                         >
                                             Edit
                                         </Link>
+
                                         <button
                                             @click="DeleteUser(user.id)"
                                             class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3"

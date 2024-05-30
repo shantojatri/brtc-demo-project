@@ -2,10 +2,13 @@
 import { reactive } from "vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head, router, Link } from "@inertiajs/vue3";
+import { useToast } from "vue-toastification";
 
 const props = defineProps({
     user: Object,
 });
+
+const toast = useToast();
 
 const userParams = reactive({
     name: props.user.data.name,
@@ -18,6 +21,7 @@ const userParams = reactive({
 });
 
 function createUserHandler() {
+    toast.success('User updated successfully');
     router.put(route("users.update", props.user.data.id), userParams);
 }
 </script>
