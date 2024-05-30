@@ -1,9 +1,16 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
 defineProps({
     users: Object,
 });
+
+const DeleteUser = (userId) => {
+    if (confirm("Confirm delete this user!")) {
+        console.log("deleted");
+        router.delete(route("users.destroy", userId));
+    }
+};
 </script>
 
 <template>
@@ -19,7 +26,14 @@ defineProps({
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="px-6 pt-5 text-gray-900">All User List</div>
+                    <div class="flex items-center justify-between px-6 pt-5">
+                        <div class="text-gray-900">All User List</div>
+                        <Link
+                            :href="route('users.create')"
+                            class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 text-center me-2 mb-2"
+                            >Add New</Link
+                        >
+                    </div>
 
                     <!-- Table  -->
                     <div
@@ -111,16 +125,18 @@ defineProps({
                                         </span>
                                     </td>
                                     <td class="flex items-center px-6 py-4">
-                                        <a
-                                            href="#"
+                                        <Link
+                                            :href="route('users.edit', user.id)"
                                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                            >Edit</a
                                         >
-                                        <a
-                                            href="#"
+                                            Edit
+                                        </Link>
+                                        <button
+                                            @click="DeleteUser(user.id)"
                                             class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3"
-                                            >Remove</a
                                         >
+                                            Delete
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>

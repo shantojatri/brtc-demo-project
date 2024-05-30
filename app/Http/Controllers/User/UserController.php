@@ -4,9 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Models\User;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use App\Services\User\UserService;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
+use App\Http\Requests\User\UserRequest;
 
 class UserController extends Controller
 {
@@ -38,9 +39,12 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $validate = $request->validated();
+        $this->userService->storeOrUpdateData($validate);
+
+        return redirect()->route('users.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -57,16 +61,19 @@ class UserController extends Controller
     public function edit(User $user)
     {
         return Inertia::render('User/Edit', [
-            "user" => $user
+            "user" => new UserResource($user)
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $validate = $request->validated();
+        $this->userService->storeOrUpdateData($validate, $user->id);
+
+        return redirect()->route('users.index')->with('success', 'User updated successfully');
     }
 
     /**
@@ -74,6 +81,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $this->userService->destroy($user);
+
+        return redirect()->route('users.index')->with('success', 'User deleted successfully');
     }
 }

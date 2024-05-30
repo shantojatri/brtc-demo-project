@@ -39,5 +39,31 @@ class BaseService {
             Log::info('Something went wrong- '. $e->getMessage());
         }
     }
+
+    /**
+     * @param array $data
+     * @param null $id
+     * @return void
+     */
+    public function storeOrUpdate(array $data, $id = null)
+    {
+        try {
+            if ($id) {
+                return $this->model::findOrFail($id)->update($data);
+            } else {
+                return $this->model::create($data);
+            }
+        } catch (Exception $e) {
+            Log::info('Something went wrong- '. $e->getMessage());
+        }
+    }
+
+    public function destroy($model){
+        try {
+            return $model->delete();
+        } catch (Exception $e) {
+            Log::info('Something went wrong- '. $e->getMessage());
+        }
+    }
 }
 
