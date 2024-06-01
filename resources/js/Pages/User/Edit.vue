@@ -21,8 +21,10 @@ const userParams = reactive({
 });
 
 function createUserHandler() {
-    toast.success('User updated successfully');
-    router.put(route("users.update", props.user.data.id), userParams);
+    // toast.success('User updated successfully');
+    router.put(route("users.update", props.user.data.id), userParams, {
+        onSuccess: () => toast.success('User updated successfully'),
+    });
 }
 </script>
 
@@ -56,14 +58,14 @@ function createUserHandler() {
                             <div class="mb-2">
                                 <label
                                     for="name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    class="block mb-2 text-sm font-medium text-gray-900"
                                     >Name</label
                                 >
                                 <input
                                     v-model="userParams.name"
                                     type="text"
                                     id="name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     placeholder="John Doe"
                                 />
                                 <p
@@ -77,14 +79,14 @@ function createUserHandler() {
                             <div class="mb-2">
                                 <label
                                     for="email"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    class="block mb-2 text-sm font-medium text-gray-900"
                                     >Email</label
                                 >
                                 <input
                                     v-model="userParams.email"
                                     type="email"
                                     id="email"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     placeholder="johndoe@example.com"
                                 />
                                 <p
@@ -98,14 +100,14 @@ function createUserHandler() {
                             <div class="mb-2">
                                 <label
                                     for="phone"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    class="block mb-2 text-sm font-medium text-gray-900"
                                     >Phone</label
                                 >
                                 <input
                                     v-model="userParams.phone"
                                     type="tel"
                                     id="phone"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     placeholder="01XXX-XXXXXX"
                                 />
                                 <p
@@ -119,13 +121,13 @@ function createUserHandler() {
                             <div class="mb-2">
                                 <label
                                     for="role"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    class="block mb-2 text-sm font-medium text-gray-900"
                                     >Select a role</label
                                 >
                                 <select
                                     v-model="userParams.role"
                                     id="role"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 >
                                     <option selected>Choose a role</option>
                                     <option value="admin">Admin</option>
@@ -142,13 +144,13 @@ function createUserHandler() {
                             <div class="mb-2">
                                 <label
                                     for="status"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    class="block mb-2 text-sm font-medium text-gray-900"
                                     >Select a status</label
                                 >
                                 <select
                                     v-model="userParams.status"
                                     id="status"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 >
                                     <option selected>Choose a status</option>
                                     <option value="active">Active</option>
@@ -165,14 +167,14 @@ function createUserHandler() {
                             <div class="mb-2">
                                 <label
                                     for="password"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    class="block mb-2 text-sm font-medium text-gray-900"
                                     >Password</label
                                 >
                                 <input
                                     v-model="userParams.password"
                                     type="password"
                                     id="password"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     placeholder="Enter your password"
                                 />
                                 <p
@@ -186,14 +188,14 @@ function createUserHandler() {
                             <div class="mb-4">
                                 <label
                                     for="confirm_password"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    class="block mb-2 text-sm font-medium text-gray-900"
                                     >Confirm password</label
                                 >
                                 <input
                                     v-model="userParams.password_confirmation"
                                     type="password"
                                     id="confirm_password"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     placeholder="Confirm your password"
                                 />
                             </div>
